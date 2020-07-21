@@ -1,11 +1,11 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
-import { LoginView } from '../login-view/login-view';
-import { RegistrationView } from '../registration-view/registration-view';
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
-import './main-view.scss';
+import { LoginView } from "../login-view/login-view";
+import { RegistrationView } from "../registration-view/registration-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
+import "./main-view.scss";
 
 export class MainView extends React.Component {
   constructor() {
@@ -23,8 +23,8 @@ export class MainView extends React.Component {
 
   getMovies(token) {
     axios
-      .get('https://vfa.herokuapp.com/movies', {
-        headers: { Authorization: 'Bearer ' + token },
+      .get("https://vfa.herokuapp.com/movies", {
+        headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {
         // Assign result to a state
@@ -39,13 +39,13 @@ export class MainView extends React.Component {
 
   componentDidMount() {
     //  Get value of token from localStorage if present
-    let accessToken = localStorage.getItem('token');
-    console.log('ac ===' + accessToken);
-    let usernameeee = localStorage.getItem('user');
-    console.log('uesr is====' + usernameeee);
+    let accessToken = localStorage.getItem("token");
+    console.log("ac ===" + accessToken);
+    let usernameeee = localStorage.getItem("user");
+    console.log("uesr is====" + usernameeee);
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user'),
+        user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
     }
@@ -67,13 +67,13 @@ export class MainView extends React.Component {
     this.setState({
       user: authData.user.Username,
     });
-    console.log('username =====' + authData.user.Username);
-    console.log('token =====' + authData.token);
+    console.log("username =====" + authData.user.Username);
+    console.log("token =====" + authData.token);
     // Add authData to browser's
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    console.log('localtoken ===' + localStorage.token);
-    console.log('localusername ===' + localStorage.user);
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
+    console.log("localtoken ===" + localStorage.token);
+    console.log("localusername ===" + localStorage.user);
     // Calls endpoint once user is logged in
     this.getMovies(authData.token);
   }
